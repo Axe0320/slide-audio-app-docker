@@ -1,0 +1,10 @@
+services:
+  slide-audio-app:
+    build:
+      context: .
+    ports:
+      - "5678:5678"
+    volumes:
+      - "${SLIDE_AUDIO_OUTPUT_DIR:-./output}:/app/output"
+    environment:
+      PYTHONUNBUFFERED: "1"
