@@ -38,6 +38,14 @@ Docker版では `edge-tts` のみ利用できます。Windows標準のSAPI音声
 
 生成ファイルはホスト側の `output/` に保存されます。画面の保存先選択から既存のサブフォルダを選べます。新しいフォルダを選んだ場合は名前を入力すると自動作成されます。停止する場合は次を実行します。
 
+保存先をプロジェクト外へ変更する場合は、`.env` に次のように記述します。`.env` は個人環境用の設定なのでGitには登録しません。
+
+```dotenv
+SLIDE_AUDIO_OUTPUT_DIR=C:/Users/ユーザー名/Desktop/slide-audio
+```
+
+設定を変更した場合は、`start.bat` または `docker compose up -d --build` でコンテナを再作成してください。
+
 ```powershell
 docker compose down
 ```
@@ -136,6 +144,9 @@ flowchart TD
 ```
 slide_audio_app/
 ├── start.bat            ← ダブルクリックでDocker Composeを起動
+├── Dockerfile            ← Pythonとffmpegを含むイメージ定義
+├── compose.yaml          ← ポートと出力先volumeの定義
+├── .dockerignore         ← Dockerビルドから除外するファイル
 ├── server.py            ← Flaskサーバー本体（TTS・ffmpeg・ジョブ管理）
 ├── requirements.txt     ← Python依存パッケージ
 ├── .gitignore
